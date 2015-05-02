@@ -7,7 +7,6 @@ var kalaApp = kalaApp || {};
     var EmailService = function () {
 
         var emails = [];
-        var lastId = 0;
         var url = "http://169.254.202.214/api/email";
 
         /**
@@ -16,15 +15,7 @@ var kalaApp = kalaApp || {};
          * @returns {*} jQuery promise with array of all emails
          */
         var getEmails = function () {
-            // TODO: get emails from server, currently just dummy data
-
-
-
             var json = $.getJSON(url);
-            json.done(function (data) {
-                console.dir(data);
-            });
-
             return json;
         };
 
@@ -33,18 +24,18 @@ var kalaApp = kalaApp || {};
 
             var email = {
                 address: emailAddress,
-                id: lastId,
                 software: "ASD"
             };
-            lastId++;
 
-            $.ajax({
+            var promise = $.ajax({
                 type: 'POST',
                 url: url,
                 data: JSON.stringify(email),
                 contentType: "application/json",
                 dataType: 'json'
             });
+
+            return promise;
         };
 
         var deleteEmail = function (id) {

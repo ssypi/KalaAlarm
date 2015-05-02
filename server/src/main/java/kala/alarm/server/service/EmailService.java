@@ -15,15 +15,23 @@ import java.util.List;
 public class EmailService {
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
 
+    private int lastId = 0;
+
     // TODO: use database, not an in-memory list
     private List<Email> emails = new ArrayList<Email>() {{
         add(new Email(0, "Kalamies.Kukaties@asd.fi", "Word"));
         add(new Email(1, "Samuli.Koponen@asd.fi" , "Word"));
     }};
 
-    public void createEmail(Email email) {
+    public Email createEmail(Email email) {
+        email.setId(generateId());
         LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
         emails.add(email);
+        return email;
+    }
+
+    private int generateId() {
+        return lastId++;
     }
 
     public List<Email> getEmails() {
