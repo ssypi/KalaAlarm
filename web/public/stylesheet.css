@@ -1,0 +1,51 @@
+body {
+    background-color: #b7d1c4;
+    height: 50%
+}
+
+#softwares{
+    width: 20%;
+    float: left;
+    margin-left: 25%;
+}
+
+#emails{
+    width: 20%;
+    float: left;
+}
+
+h1 {
+    background-color: aliceblue;
+    margin-left: 10px;
+    padding-left: 20px;
+}
+
+li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+button {
+    margin-left: 10px;
+    height: 25px;
+    width: 100px;
+}
+
+#errorhistorybutton {
+    margin-left: 60px;
+}
+
+ul {
+    border: 1px solid black;
+    margin-left: 10px;
+    padding-left: 10px;
+    height: 10%;
+    overflow: auto;
+    max-height: 500px;
+    list-style-type: none;
+}
+
+.removeEmailButton {
+    float: right;
+    margin-right: 10px;
+}

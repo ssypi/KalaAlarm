@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -29,5 +27,13 @@ public class EmailController {
     public List<Email> getEmails(@Context Request request) {
         LOG.info("Email request from " + request.getRemoteAddr());
         return emailService.getEmails();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Email addEmail(Email email) {
+        emailService.createEmail(email);
+
+        return email;
     }
 }
