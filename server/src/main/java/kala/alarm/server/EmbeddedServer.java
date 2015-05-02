@@ -1,5 +1,6 @@
 package kala.alarm.server;
 
+import kala.alarm.server.controller.CORSResponseFilter;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.grizzly.http.server.accesslog.AccessLogBuilder;
@@ -45,6 +46,7 @@ public class EmbeddedServer {
 
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.packages("kala.alarm.server.controller", "kala.alarm.server.service");
+        resourceConfig.register(CORSResponseFilter.class);
         LOG.info("Starting HTTP Server on " + uri.toString());
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig, false);
 
