@@ -5,9 +5,7 @@ var kalaApp = kalaApp || {};
     "use strict";
 
     var EmailService = function () {
-
-        var emails = [];
-        var url = "http://169.254.202.214/api/email";
+        var gateway = app.gateway;
 
         /**
          * Use the done and fail methods of the returned promise
@@ -15,38 +13,27 @@ var kalaApp = kalaApp || {};
          * @returns {*} jQuery promise with array of all emails
          */
         var getEmails = function () {
-            var json = $.getJSON(url);
-            return json;
+            return gateway.getData("email");
         };
 
+        /**
+         *
+         * @param emailAddress full email address
+         * @returns {*} jQuery promise with results
+         */
         var addEmail = function (emailAddress) {
             console.log("Adding email: " + emailAddress);
-
             var email = {
                 address: emailAddress,
                 software: "ASD"
             };
-
-            var promise = $.ajax({
-                type: 'POST',
-                url: url,
-                data: JSON.stringify(email),
-                contentType: "application/json",
-                dataType: 'json'
-            });
-
+            var promise = gateway.postData("email", email);
             return promise;
         };
 
         var deleteEmail = function (id) {
             console.log("Removing email id: " + id);
-
-            for (var i = emails.length - 1; i >= 0; i--) {
-                if (emails[i].id == id) {
-                    console.log("Removing email: " + emails[i].address);
-                    emails.splice(i, 1);
-                }
-            }
+            // TODO: send delete request to server through gateway
         };
 
         return {
