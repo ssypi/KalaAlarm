@@ -4,6 +4,9 @@ public class AppError {
     private String origin;
     private String message;
 
+    public AppError() {
+    }
+
     public AppError(String message, String origin) {
         this.origin = origin;
         this.message = message;
