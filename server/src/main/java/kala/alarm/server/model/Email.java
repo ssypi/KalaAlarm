@@ -1,9 +1,13 @@
 package kala.alarm.server.model;
 
 public class Email {
-    private final int id;
-    private final String address;
-    private final String software;
+    private int id;
+    private String address;
+    private String software;
+
+    public Email() {
+
+    }
 
     public Email(int id, String address, String software) {
         this.id = id;
@@ -21,5 +25,17 @@ public class Email {
 
     public String getSoftware() {
         return software;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setSoftware(String software) {
+        this.software = software;
     }
 }
