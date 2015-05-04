@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 import javax.ws.rs.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Singleton
@@ -30,6 +31,16 @@ public class EmailService {
         LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
         emailRepository.save(email);
         return email;
+    }
+
+    public void deleteEmail(int id) {
+        Iterator<Email> i = emails.iterator();
+        while (i.hasNext()) {
+            Email email = i.next();
+            if (email.getId() == id) {
+                i.remove();
+            }
+        }
     }
 
     private int generateId() {

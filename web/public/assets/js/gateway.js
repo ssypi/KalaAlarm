@@ -30,9 +30,20 @@ var kalaApp = kalaApp || {};
             return promise;
         };
 
+        var deleteEmail = function (resource, id) {
+            var uri = apiUrl + resource + "/" + id;
+            var promise = $.ajax({
+                type: 'DELETE',
+                url: uri,
+                contentType: "application/json"
+            });
+            return promise;
+        };
+
         return {
             getData : getData,
-            postData : postData
+            postData : postData,
+            deleteEmail : deleteEmail
         }
     };
 

@@ -34,6 +34,7 @@ var kalaApp = kalaApp || {};
         var deleteEmail = function (id) {
             console.log("Removing email id: " + id);
             // TODO: send delete request to server through gateway
+            return gateway.deleteEmail("email", id);
         };
 
         return {

@@ -4,6 +4,7 @@
     "use strict";
 
     var emailService = app.emailService;
+    var applicationService = app.applicationService;
 
     $(document).ready(function() {
         // Attach click listeners after page has been fully loaded
@@ -19,11 +20,12 @@
 
         $("#emaillist").click(".removeEmailButton", function(event) {
             var id = event.target.id;
-            emailService.deleteEmail(id);
+            emailService.deleteEmail(id).done(updateEmails);
             console.log("Removing email")
         });
 
         updateEmails();
+        updateSoftwares();
     });
 
     /**
@@ -39,6 +41,17 @@
             })
         });
     };
+
+    var updateSoftwares = function () {
+        applicationService.getApplications().done(function (applications) {
+            $('#softwarelist').empty();
+            applications.forEach(function (application) {
+                $('#softwarelist').append("<li>"
+                + "<button class='applicationButton' id='"
+                + application.id + "'>" + application.name + "</button> </li>");
+            })
+        })
+    }
 
 })(jQuery, kalaApp);
 

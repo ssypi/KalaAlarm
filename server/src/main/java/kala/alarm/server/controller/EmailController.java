@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,5 +34,12 @@ public class EmailController {
     public Response addEmail(Email email) {
         emailService.createEmail(email);
         return Response.status(Response.Status.CREATED).entity(email).build();
+    }
+
+    @Path("/{id:\\d+}")
+    @DELETE
+    public Response deleteEmail(@PathParam("id") int id) {
+        emailService.deleteEmail(id);
+        return Response.status(Response.Status.OK).build();
     }
 }
