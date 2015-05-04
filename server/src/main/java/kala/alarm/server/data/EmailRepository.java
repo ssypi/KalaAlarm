@@ -24,7 +24,6 @@ public class EmailRepository {
         hibernateSession.beginTransaction();
         hibernateSession.save(email);
         hibernateSession.getTransaction().commit();
-        hibernateSession.close();
         System.err.println("Done");
 
         return email;
@@ -43,6 +42,7 @@ public class EmailRepository {
 
         Email email = (Email) hibernateSession.get(Email.class, id);
         hibernateSession.delete(email);
+        hibernateSession.flush();
 
         return email;
 
