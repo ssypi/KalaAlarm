@@ -1,5 +1,6 @@
 package kala.alarm.server.service;
 
+import kala.alarm.server.data.EmailRepository;
 import kala.alarm.server.model.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ import java.util.List;
 public class EmailService {
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
 
+    private EmailRepository emailRepository = new EmailRepository();
+
     private int lastId = 0;
 
     // TODO: use database, not an in-memory list
@@ -24,9 +27,8 @@ public class EmailService {
     }};
 
     public Email createEmail(Email email) {
-        email.setId(generateId());
         LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
-        emails.add(email);
+        emailRepository.save(email);
         return email;
     }
 
@@ -35,6 +37,14 @@ public class EmailService {
     }
 
     public List<Email> getEmails() {
-        return Collections.unmodifiableList(emails);
+
+        return emailRepository.getAll();
+
+    }
+
+    public void deleteEmail(int id) {
+
+        emailRepository.delete(id);
+
     }
 }
