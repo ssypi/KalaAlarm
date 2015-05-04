@@ -19,13 +19,6 @@ public class EmailService {
 
     private EmailRepository emailRepository = new EmailRepository();
 
-    private int lastId = 0;
-
-    // TODO: use database, not an in-memory list
-    private List<Email> emails = new ArrayList<Email>() {{
-        add(new Email(0, "Kalamies.Kukaties@asd.fi", "Word"));
-        add(new Email(1, "Samuli.Koponen@asd.fi" , "Word"));
-    }};
 
     public Email createEmail(Email email) {
         LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
@@ -33,19 +26,6 @@ public class EmailService {
         return email;
     }
 
-    public void deleteEmail(int id) {
-        Iterator<Email> i = emails.iterator();
-        while (i.hasNext()) {
-            Email email = i.next();
-            if (email.getId() == id) {
-                i.remove();
-            }
-        }
-    }
-
-    private int generateId() {
-        return lastId++;
-    }
 
     public List<Email> getEmails() {
 
