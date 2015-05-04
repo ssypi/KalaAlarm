@@ -27,9 +27,10 @@ public class ApplicationController {
     private ApplicationService applicationService;
 
     @GET
-    public List<Application> getSoftwares(@Context Request request) {
+    public List<Application> getApplications(@Context Request request) {
         LOG.info("Application request from " + request.getRemoteAddr());
-        return applicationService.getApplications();
+        List<Application> applications = applicationService.getApplications();
+        return applications;
     }
 
     @POST

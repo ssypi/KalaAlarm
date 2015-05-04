@@ -25,7 +25,7 @@
         });
 
         updateEmails();
-        updateSoftwares();
+        updateApplications();
     });
 
     /**
@@ -42,7 +42,7 @@
         });
     };
 
-    var updateSoftwares = function () {
+    var updateApplications = function () {
         applicationService.getApplications().done(function (applications) {
             $('#softwarelist').empty();
             applications.forEach(function (application) {
