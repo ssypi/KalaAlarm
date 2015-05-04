@@ -5,6 +5,7 @@
 
     var emailService = app.emailService;
     var applicationService = app.applicationService;
+    var applicationId = null;
 
     $(document).ready(function() {
         // Attach click listeners after page has been fully loaded
@@ -15,7 +16,7 @@
 
         $('#addemailbutton').click(function () {
             var email = prompt("Please insert email");
-            emailService.addEmail(email).done(updateEmails);
+            emailService.addEmail(email, applicationId).done(updateEmails);
         });
 
         $("#emaillist").click(".removeEmailButton", function(event) {
@@ -24,7 +25,11 @@
             console.log("Removing email")
         });
 
-        updateEmails();
+        $("#softwarelist").click(".applicationButton", function(event) {
+            applicationId = event.target.id;
+            updateEmails();
+        });
+
         updateApplications();
     });
 
@@ -32,7 +37,7 @@
      * Update the contents of the email list
      */
     var updateEmails = function () {
-        emailService.getEmails().done(function (emails) {
+        applicationService.getSubscribers(applicationId).done(function (emails) {
             $('#emaillist').empty();
             emails.forEach(function (email) {
                 $('#emaillist').append("<li>" + email.address

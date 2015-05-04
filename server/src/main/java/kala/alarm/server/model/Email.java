@@ -3,16 +3,16 @@ package kala.alarm.server.model;
 public class Email {
     private int id;
     private String address;
-    private String software;
+    private int applicationId;
 
     public Email() {
 
     }
 
-    public Email(int id, String address, String software) {
+    public Email(int id, String address, int applicationId) {
         this.id = id;
         this.address = address;
-        this.software = software;
+        this.applicationId = applicationId;
     }
 
     public String getAddress() {
@@ -23,8 +23,8 @@ public class Email {
         return id;
     }
 
-    public String getSoftware() {
-        return software;
+    public int getApplicationId() {
+        return applicationId;
     }
 
     public void setId(int id) {
@@ -35,7 +35,7 @@ public class Email {
         this.address = address;
     }
 
-    public void setSoftware(String software) {
-        this.software = software;
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
     }
 }

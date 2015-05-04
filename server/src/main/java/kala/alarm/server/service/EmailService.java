@@ -19,8 +19,8 @@ public class EmailService {
 
     // TODO: use database, not an in-memory list
     private List<Email> emails = new ArrayList<Email>() {{
-        add(new Email(0, "Kalamies.Kukaties@asd.fi", "Word"));
-        add(new Email(1, "Samuli.Koponen@asd.fi" , "Word"));
+        add(new Email(0, "Kalamies.Kukaties@asd.fi", 0));
+        add(new Email(1, "Samuli.Koponen@asd.fi" , 0));
     }};
 
     public Email createEmail(Email email) {
