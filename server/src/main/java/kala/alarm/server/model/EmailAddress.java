@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="email")
-public class Email {
+public class EmailAddress {
     @Id
     @Column(name="id")
     @GeneratedValue
@@ -16,11 +16,11 @@ public class Email {
     @Column(name="software")
     private String software;
 
-    public Email() {
+    public EmailAddress() {
 
     }
 
-    public Email(int id, String address, String software) {
+    public EmailAddress(int id, String address, String software) {
         this.id = id;
         this.address = address;
         this.software = software;

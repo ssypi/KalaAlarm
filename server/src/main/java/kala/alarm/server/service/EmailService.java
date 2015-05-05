@@ -2,7 +2,7 @@ package kala.alarm.server.service;
 
 import kala.alarm.server.data.GenericHibernateRepository;
 import kala.alarm.server.data.Repository;
-import kala.alarm.server.model.Email;
+import kala.alarm.server.model.EmailAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,18 +15,18 @@ import java.util.List;
 public class EmailService {
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
 
-    private Repository<Email> emailRepository = new GenericHibernateRepository<>(Email.class);
+    private Repository<EmailAddress> emailRepository = new GenericHibernateRepository<>(EmailAddress.class);
 
 
-    public Email createEmail(Email email) {
-        LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
+    public EmailAddress createEmail(EmailAddress email) {
+        LOG.debug("EmailAddress address {}, id: {}", email.getAddress(), email.getId());
         emailRepository.save(email);
 
         return email;
     }
 
 
-    public List<Email> getEmails() {
+    public List<EmailAddress> getEmails() {
 
         return emailRepository.getAll();
 

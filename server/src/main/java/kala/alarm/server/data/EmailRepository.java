@@ -1,6 +1,6 @@
 package kala.alarm.server.data;
 
-import kala.alarm.server.model.Email;
+import kala.alarm.server.model.EmailAddress;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class EmailRepository {
     }
 
 
-    public Email save(Email email) {
+    public EmailAddress save(EmailAddress email) {
 
         hibernateSession.beginTransaction();
         hibernateSession.save(email);
@@ -30,17 +30,17 @@ public class EmailRepository {
 
     }
 
-    public List<Email> getAll() {
+    public List<EmailAddress> getAll() {
 
-        List list = hibernateSession.createCriteria(Email.class).list();
+        List list = hibernateSession.createCriteria(EmailAddress.class).list();
 
         return list;
 
     }
 
-    public Email delete(int id) {
+    public EmailAddress delete(int id) {
 
-        Email email = (Email) hibernateSession.get(Email.class, id);
+        EmailAddress email = (EmailAddress) hibernateSession.get(EmailAddress.class, id);
         hibernateSession.delete(email);
         hibernateSession.flush();
 

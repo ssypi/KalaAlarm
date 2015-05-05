@@ -1,7 +1,7 @@
 package kala.alarm.server.controller;
 
 
-import kala.alarm.server.model.Email;
+import kala.alarm.server.model.EmailAddress;
 import kala.alarm.server.service.EmailService;
 import org.glassfish.grizzly.http.server.Request;
 import org.slf4j.Logger;
@@ -25,13 +25,13 @@ public class EmailController {
     private EmailService emailService;
 
     @GET
-    public List<Email> getEmails(@Context Request request) {
-        LOG.info("Email request from " + request.getRemoteAddr());
+    public List<EmailAddress> getEmails(@Context Request request) {
+        LOG.info("EmailAddress request from " + request.getRemoteAddr());
         return emailService.getEmails();
     }
 
     @POST
-    public Response addEmail(Email email) {
+    public Response addEmail(EmailAddress email) {
         emailService.createEmail(email);
         return Response.status(Response.Status.CREATED).entity(email).build();
     }
