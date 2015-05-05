@@ -1,6 +1,7 @@
 package kala.alarm.server.service;
 
 import kala.alarm.server.model.AppError;
+import kala.alarm.server.model.Application;
 import kala.alarm.server.model.EmailAddress;
 import kala.alarm.server.model.EmailMessage;
 import org.slf4j.Logger;
@@ -33,7 +34,8 @@ public class ErrorService {
         errors.add(error);
         Set<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
         EmailMessage emailMessage = new EmailMessage();
-        emailMessage.setSubject("Error from: " + error.getApplicationId());
+        Application application = applicationService.getApplication(error.getApplicationId());
+        emailMessage.setSubject("Error from: " + application.getName());
         emailMessage.setBody(error.getMessage());
         emailSender.sendEmail(emailMessage, recipients);
     }

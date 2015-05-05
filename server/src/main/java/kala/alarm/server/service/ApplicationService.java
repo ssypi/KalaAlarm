@@ -36,6 +36,10 @@ public class ApplicationService {
         return application.getSubscribers();
     }
 
+    public Application getApplication(int applicationId) {
+        return applicationRepository.getById(applicationId);
+    }
+
     public List<Application> getApplications() {
 
         return applicationRepository.getAll();
