@@ -1,7 +1,7 @@
 package kala.alarm.server.controller;
 
 import kala.alarm.server.model.Application;
-import kala.alarm.server.model.Email;
+import kala.alarm.server.model.EmailAddress;
 import kala.alarm.server.service.ApplicationService;
 import org.glassfish.grizzly.http.server.Request;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class ApplicationController {
 
     @Path("/{id:\\d+}/subscribers")
     @GET
-    public List<Email> getSubscribers(@PathParam("id") int applicationId) {
+    public List<EmailAddress> getSubscribers(@PathParam("id") int applicationId) {
         return applicationService.getSubscribers(applicationId);
     }
 
@@ -42,4 +42,12 @@ public class ApplicationController {
         applicationService.addApplication(application);
         return Response.status(Response.Status.CREATED).entity(application).build();
     }
+
+    @Path("/{id:\\d+}/subscribers")
+    @POST
+    public Response addSubscriber(@PathParam("id" )int applicationId, EmailAddress emailAddress) {
+        applicationService.addSubscriber(applicationId, emailAddress);
+        return Response.status(Response.Status.CREATED).entity(emailAddress).build();
+    }
+
 }

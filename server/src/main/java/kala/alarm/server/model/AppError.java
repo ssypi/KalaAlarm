@@ -1,23 +1,22 @@
 package kala.alarm.server.model;
 
 public class AppError {
-    private String origin;
+    private int applicationId;
     private String message;
 
     public AppError() {
     }
 
-    public AppError(String message, String origin) {
-        this.origin = origin;
+    public AppError(String message, int applicationId) {
+        this.applicationId = applicationId;
         this.message = message;
     }
 
-    public String getOrigin() {
-        return origin;
+    public int getApplicationId() { return applicationId;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
     }
 
     public String getMessage() {

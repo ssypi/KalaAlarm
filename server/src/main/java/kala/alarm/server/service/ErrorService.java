@@ -1,6 +1,8 @@
 package kala.alarm.server.service;
 
 import kala.alarm.server.model.AppError;
+import kala.alarm.server.model.EmailAddress;
+import kala.alarm.server.model.EmailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,20 +15,30 @@ import java.util.List;
 @Singleton
 @Path("service-error")
 public class ErrorService {
+
     private static final Logger LOG = LoggerFactory.getLogger(ErrorService.class);
+    private EmailSender emailSender = new EmailSender();
+    private ApplicationService applicationService = new ApplicationService();
+
 
     // TODO: use database, not an in-memory list
     private List<AppError> errors = new ArrayList<AppError>() {{
-        add(new AppError("Super error", "From super app"));
-        add(new AppError("Super error2", "From super app2"));
+        add(new AppError("Super error", 0));
+        add(new AppError("Super error2", 0));
     }};
 
     public void createError(AppError error) {
-        LOG.debug("Error from {}, message: {}", error.getOrigin(), error.getMessage());
+        LOG.debug("Error from {}, message: {}", error.getApplicationId(), error.getMessage());
         errors.add(error);
+        List<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
+        EmailMessage emailMessage = new EmailMessage();
+        emailMessage.setSubject("Error from: " + error.getApplicationId());
+        emailMessage.setBody(error.getMessage());
+        emailSender.sendEmail(emailMessage, recipients);
     }
 
     public List<AppError> getErrors() {
         return Collections.unmodifiableList(errors);
     }
+
 }

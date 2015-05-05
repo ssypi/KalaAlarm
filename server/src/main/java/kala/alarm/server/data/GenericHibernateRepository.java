@@ -34,7 +34,7 @@ public class GenericHibernateRepository<T> implements Repository<T> {
     @Override
     public T save(T object) {
         hibernateSession.beginTransaction();
-        hibernateSession.save(object);
+        hibernateSession.saveOrUpdate(object);
         hibernateSession.getTransaction().commit();
         return object;
     }
