@@ -1,25 +1,20 @@
 package kala.alarm.server.model;
 
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "application")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Application {
     @Id
-    @Column(name="id")
     @GeneratedValue
     private int id;
 
-    @Column(name = "name")
     private String name;
 
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<EmailAddress> subscribers = new HashSet<>();
 
     public Application() {
@@ -47,8 +42,6 @@ public class Application {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "subscribers", joinColumns = {@JoinColumn(name = "id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
     public Set<EmailAddress> getSubscribers() {
         return subscribers;
     }
