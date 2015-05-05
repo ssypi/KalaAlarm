@@ -45,4 +45,20 @@ public class ApplicationService {
         return applicationRepository.getAll();
 
     }
+
+    public EmailAddress deleteSubscriber(int applicationId, int emailId) {
+        Application application = applicationRepository.getById(applicationId);
+        Set<EmailAddress> subscribers = application.getSubscribers();
+
+        Iterator<EmailAddress> i = subscribers.iterator();
+        while (i.hasNext()) {
+            EmailAddress emailAddress = i.next();
+            if (emailAddress.getId() == emailId) {
+                i.remove();
+                applicationRepository.save(application);
+                return emailAddress;
+            }
+        }
+        return null;
+    }
 }

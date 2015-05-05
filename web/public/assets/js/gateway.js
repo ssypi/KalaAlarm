@@ -24,6 +24,18 @@ var kalaApp = kalaApp || {};
             return promise;
         };
 
+        var postSubResource = function(resource, id, subResource, data) {
+            var uri = apiUrl + resource + "/" + id + "/" + subResource;
+            var promise = $.ajax({
+                type: 'POST',
+                url: uri,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json'
+            });
+            return promise;
+        };
+
         var postData = function(resource, data) {
             var uri = apiUrl + resource;
             var promise = $.ajax({
@@ -36,7 +48,17 @@ var kalaApp = kalaApp || {};
             return promise;
         };
 
-        var deleteEmail = function (resource, id) {
+        var deleteSubResource = function(resource, id, subResource, subResourceId) {
+            var uri = apiUrl + resource + "/" + id + "/" + subResource + "/" + subResourceId;
+            var promise = $.ajax({
+                type: 'DELETE',
+                url: uri,
+                contentType: "application/json"
+            });
+            return promise;
+        };
+
+        var deleteData = function (resource, id) {
             var uri = apiUrl + resource + "/" + id;
             var promise = $.ajax({
                 type: 'DELETE',
@@ -50,7 +72,9 @@ var kalaApp = kalaApp || {};
             getData : getData,
             getSubResource: getSubResource,
             postData : postData,
-            deleteEmail : deleteEmail
+            deleteData : deleteData,
+            postSubResource: postSubResource,
+            deleteSubResource: deleteSubResource
         }
     };
 

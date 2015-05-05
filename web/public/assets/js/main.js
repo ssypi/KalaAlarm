@@ -5,6 +5,7 @@
 
     var emailService = app.emailService;
     var applicationService = app.applicationService;
+    var errorService = app.errorService;
     var applicationId = null;
 
     $(document).ready(function() {
@@ -20,8 +21,8 @@
         });
 
         $("#emaillist").click(".removeEmailButton", function(event) {
-            var id = event.target.id;
-            emailService.deleteEmail(id).done(updateEmails);
+            var emailId = event.target.id;
+            emailService.deleteEmail(applicationId, emailId).done(updateEmails);
             console.log("Removing email")
         });
 
@@ -56,7 +57,13 @@
                 + application.id + "'>" + application.name + "</button> </li>");
             })
         })
-    }
+    };
+
+    var updateErrorHistory = function () {
+        errorService.getErrors(applicationId).done(function (errors) {
+
+        });
+    };
 
 })(jQuery, kalaApp);
 

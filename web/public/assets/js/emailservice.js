@@ -24,17 +24,15 @@ var kalaApp = kalaApp || {};
         var addEmail = function (emailAddress, applicationId) {
             console.log("Adding email: " + emailAddress);
             var email = {
-                address: emailAddress,
-                applicationId: applicationId
+                address: emailAddress
             };
-            var promise = gateway.postData("email", email);
+            var promise = gateway.postSubResource("application", applicationId, "subscribers", email);
             return promise;
         };
 
-        var deleteEmail = function (id) {
-            console.log("Removing email id: " + id);
-            // TODO: send delete request to server through gateway
-            return gateway.deleteEmail("email", id);
+        var deleteEmail = function (applicationId, emailId) {
+            console.log("Removing email from application id: " + applicationId);
+            return gateway.deleteSubResource("application", applicationId, "subscribers", emailId);
         };
 
         return {

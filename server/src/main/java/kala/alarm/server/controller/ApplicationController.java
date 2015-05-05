@@ -3,6 +3,7 @@ package kala.alarm.server.controller;
 import kala.alarm.server.model.Application;
 import kala.alarm.server.model.EmailAddress;
 import kala.alarm.server.service.ApplicationService;
+import org.apache.commons.mail.Email;
 import org.glassfish.grizzly.http.server.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,4 +52,9 @@ public class ApplicationController {
         return Response.status(Response.Status.CREATED).entity(emailAddress).build();
     }
 
+    @Path("/{applicationId:\\d+}/subscribers/{emailId:\\d+}")
+    @DELETE
+    public EmailAddress deleteSubscriber(@PathParam("applicationId") int applicationId, @PathParam("emailId") int emailId) {
+        return applicationService.deleteSubscriber(applicationId, emailId);
+    }
 }
