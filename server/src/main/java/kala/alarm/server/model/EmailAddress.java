@@ -1,6 +1,8 @@
 package kala.alarm.server.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="email")
@@ -15,6 +17,11 @@ public class EmailAddress {
 
     @Column(name="software")
     private int applicationId;
+
+
+
+
+    private Set<Application> applications = new HashSet<>();
 
     public EmailAddress() {
 
@@ -49,4 +56,15 @@ public class EmailAddress {
     public void setApplicationId(int applicationId) {
         this.applicationId = applicationId;
     }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "subscribers", joinColumns = {@JoinColumn(name = "id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
+    public Set<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
+    }
+
 }

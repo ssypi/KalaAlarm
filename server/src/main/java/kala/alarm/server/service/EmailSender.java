@@ -8,6 +8,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jussi on 5.5.2015.
@@ -19,7 +20,7 @@ public class EmailSender {
 
 
 
-    public void sendEmail(EmailMessage emailMessage, List<EmailAddress> recipientList){
+    public void sendEmail(EmailMessage emailMessage, Set<EmailAddress> recipientList){
 
         Email email = new SimpleEmail();
 

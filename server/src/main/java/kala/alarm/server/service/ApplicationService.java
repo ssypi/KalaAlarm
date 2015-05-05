@@ -26,12 +26,12 @@ public class ApplicationService {
 
     public void addSubscriber(int applicationId, EmailAddress email) {
         Application application = applicationRepository.getById(applicationId);
-        List<EmailAddress> subscribers = application.getSubscribers();
+        Set<EmailAddress> subscribers = application.getSubscribers();
         subscribers.add(email);
         applicationRepository.save(application);
     }
 
-    public List<EmailAddress> getSubscribers(int applicationId) {
+    public Set<EmailAddress> getSubscribers(int applicationId) {
         Application application = applicationRepository.getById(applicationId);
         return application.getSubscribers();
     }

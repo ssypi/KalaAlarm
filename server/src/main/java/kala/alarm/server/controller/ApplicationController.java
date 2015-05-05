@@ -14,6 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 @Path("application")
 @Singleton
@@ -33,7 +34,7 @@ public class ApplicationController {
 
     @Path("/{id:\\d+}/subscribers")
     @GET
-    public List<EmailAddress> getSubscribers(@PathParam("id") int applicationId) {
+    public Set<EmailAddress> getSubscribers(@PathParam("id") int applicationId) {
         return applicationService.getSubscribers(applicationId);
     }
 

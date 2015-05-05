@@ -5,7 +5,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "application")
@@ -18,7 +20,7 @@ public class Application {
     @Column(name = "name")
     private String name;
 
-    private List<EmailAddress> subscribers;
+    private Set<EmailAddress> subscribers = new HashSet<>();
 
     public Application() {
 
@@ -47,11 +49,11 @@ public class Application {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "subscribers", joinColumns = {@JoinColumn(name = "id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
-    public List<EmailAddress> getSubscribers() {
+    public Set<EmailAddress> getSubscribers() {
         return subscribers;
     }
 
-    public void setSubscribers(List<EmailAddress> subscribers) {
+    public void setSubscribers(Set<EmailAddress> subscribers) {
         this.subscribers = subscribers;
     }
 }

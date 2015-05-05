@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Singleton
 @Path("service-error")
@@ -30,7 +31,7 @@ public class ErrorService {
     public void createError(AppError error) {
         LOG.debug("Error from {}, message: {}", error.getApplicationId(), error.getMessage());
         errors.add(error);
-        List<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
+        Set<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
         EmailMessage emailMessage = new EmailMessage();
         emailMessage.setSubject("Error from: " + error.getApplicationId());
         emailMessage.setBody(error.getMessage());
