@@ -1,6 +1,7 @@
 package kala.alarm.server.controller;
 
 import kala.alarm.server.model.Application;
+import kala.alarm.server.model.Email;
 import kala.alarm.server.service.ApplicationService;
 import org.glassfish.grizzly.http.server.Request;
 import org.slf4j.Logger;
@@ -8,10 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,9 +25,16 @@ public class ApplicationController {
     private ApplicationService applicationService;
 
     @GET
-    public List<Application> getSoftwares(@Context Request request) {
+    public List<Application> getApplications(@Context Request request) {
         LOG.info("Application request from " + request.getRemoteAddr());
-        return applicationService.getApplications();
+        List<Application> applications = applicationService.getApplications();
+        return applications;
+    }
+
+    @Path("/{id:\\d+}/subscribers")
+    @GET
+    public List<Email> getSubscribers(@PathParam("id") int applicationId) {
+        return applicationService.getSubscribers(applicationId);
     }
 
     @POST

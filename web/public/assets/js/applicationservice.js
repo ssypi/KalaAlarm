@@ -16,6 +16,10 @@ var kalaApp = kalaApp || {};
             return gateway.getData("application");
         };
 
+        var getSubscribers = function (applicationId) {
+            return gateway.getSubResource("application", applicationId, "subscribers");
+        };
+
         var addApplication = function (applicationName) {
             console.log("Adding application: " + applicationName);
             var application = {
@@ -27,7 +31,8 @@ var kalaApp = kalaApp || {};
 
         return {
             getApplications: getApplications,
-            addApplication: addApplication
+            addApplication: addApplication,
+            getSubscribers: getSubscribers
         }
     };
     app.applicationService = new ApplicationService();

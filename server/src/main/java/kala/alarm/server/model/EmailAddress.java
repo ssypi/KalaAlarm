@@ -14,16 +14,16 @@ public class EmailAddress {
     private String address;
 
     @Column(name="software")
-    private String software;
+    private int applicationId;
 
     public EmailAddress() {
 
     }
-
-    public EmailAddress(int id, String address, String software) {
+    
+    public EmailAddress(int id, String address, int applicationId) {
         this.id = id;
         this.address = address;
-        this.software = software;
+        this.applicationId = applicationId;
     }
 
     public String getAddress() {
@@ -34,8 +34,8 @@ public class EmailAddress {
         return id;
     }
 
-    public String getSoftware() {
-        return software;
+    public int getApplicationId() {
+        return applicationId;
     }
 
     public void setId(int id) {
@@ -46,7 +46,7 @@ public class EmailAddress {
         this.address = address;
     }
 
-    public void setSoftware(String software) {
-        this.software = software;
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
     }
 }

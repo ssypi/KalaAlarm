@@ -21,11 +21,11 @@ var kalaApp = kalaApp || {};
          * @param emailAddress full email address
          * @returns {*} jQuery promise with results
          */
-        var addEmail = function (emailAddress) {
+        var addEmail = function (emailAddress, applicationId) {
             console.log("Adding email: " + emailAddress);
             var email = {
                 address: emailAddress,
-                software: "ASD"
+                applicationId: applicationId
             };
             var promise = gateway.postData("email", email);
             return promise;

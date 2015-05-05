@@ -18,6 +18,12 @@ var kalaApp = kalaApp || {};
             return promise;
         };
 
+        var getSubResource = function(resource, id, subResource) {
+            var uri = apiUrl + resource + "/" + id + "/" + subResource;
+            var promise = $.getJSON(uri);
+            return promise;
+        };
+
         var postData = function(resource, data) {
             var uri = apiUrl + resource;
             var promise = $.ajax({
@@ -42,6 +48,7 @@ var kalaApp = kalaApp || {};
 
         return {
             getData : getData,
+            getSubResource: getSubResource,
             postData : postData,
             deleteEmail : deleteEmail
         }
