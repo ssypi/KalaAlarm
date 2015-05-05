@@ -1,5 +1,7 @@
 package kala.alarm.server.service;
 
+import kala.alarm.server.data.GenericHibernateRepository;
+import kala.alarm.server.data.Repository;
 import kala.alarm.server.model.AppError;
 import kala.alarm.server.model.Application;
 import kala.alarm.server.model.EmailAddress;
@@ -24,14 +26,13 @@ public class ErrorService {
 
 
     // TODO: use database, not an in-memory list
-    private List<AppError> errors = new ArrayList<AppError>() {{
-        add(new AppError("Super error", 0));
-        add(new AppError("Super error2", 0));
-    }};
+    private Repository<AppError> errorRepository = new GenericHibernateRepository<>(AppError.class);
+
+
 
     public void createError(AppError error) {
         LOG.debug("Error from {}, message: {}", error.getApplicationId(), error.getMessage());
-        errors.add(error);
+        errorRepository.save(error);
         Set<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
         EmailMessage emailMessage = new EmailMessage();
         Application application = applicationService.getApplication(error.getApplicationId());
@@ -41,7 +42,7 @@ public class ErrorService {
     }
 
     public List<AppError> getErrors() {
-        return Collections.unmodifiableList(errors);
+        return Collections.unmodifiableList(errorRepository.getAll());
     }
 
 }

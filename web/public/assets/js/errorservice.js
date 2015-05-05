@@ -5,6 +5,8 @@ var kalaApp = kalaApp || {};
     "use strict";
 
     var ErrorService = function() {
+        var gateway = app.gateway;
+
         /**
          * Use the done and fail methods of the returned promise
          * example: getErrors().done(function(data) { console.log(data)});
@@ -12,29 +14,7 @@ var kalaApp = kalaApp || {};
          */
         var getErrors = function () {
             // TODO: get errors from server, currently just dummy data
-
-            var d = $.Deferred();
-
-            var dummyData = [];
-            dummyData.push({
-                id : 0,
-                desc : "Error0",
-                app : "app1"
-            });
-            dummyData.push({
-                id : 1,
-                desc : "Error1",
-                app : "app1"
-            });
-            dummyData.push({
-                id : 2,
-                desc : "Error2",
-                app : "app2"
-            });
-
-            d.resolve(dummyData);
-
-            return d.promise();
+            return gateway.getData("error");
         };
 
         return {

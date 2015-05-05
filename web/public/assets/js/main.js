@@ -12,6 +12,10 @@
         // Attach click listeners after page has been fully loaded
         $('#addsoftwarebutton').click(function () {
             var name = prompt("Please insert software name");
+
+            if (name == null || name == "") {
+                return;
+            }
             $("<li>" + "<button>" + name + "</button>" + "</li>").appendTo('#softwarelist');
         });
 
@@ -29,6 +33,7 @@
         $("#softwarelist").click(".applicationButton", function(event) {
             applicationId = event.target.id;
             updateEmails();
+            updateErrorHistory();
         });
 
         updateApplications();
@@ -60,8 +65,12 @@
     };
 
     var updateErrorHistory = function () {
-        errorService.getErrors(applicationId).done(function (errors) {
-
+        errorService.getErrors().done(function (errors) {
+            $("#errorhistorylist").empty();
+            errors.forEach(function (error) {
+                $("#errorhistorylist").append("<li>"
+                + error.message + "</li>");
+            })
         });
     };
 

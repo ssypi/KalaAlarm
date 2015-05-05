@@ -6,12 +6,20 @@ body {
 #softwares{
     width: 20%;
     float: left;
-    margin-left: 25%;
+    margin-left: 20%;
 }
 
 #emails{
     width: 20%;
     float: left;
+}
+
+#errorhistory{
+    width: 20%;
+    float: left;
+}
+
+#errorhistorylist{
 }
 
 h1 {

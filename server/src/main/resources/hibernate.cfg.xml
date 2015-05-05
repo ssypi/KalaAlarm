@@ -14,5 +14,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="kala.alarm.server.model.EmailAddress"/>
         <mapping class="kala.alarm.server.model.Application"/>
+        <mapping class="kala.alarm.server.model.AppError"/>
     </session-factory>
 </hibernate-configuration>
