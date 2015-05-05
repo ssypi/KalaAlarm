@@ -1,15 +1,13 @@
 package kala.alarm.server.service;
 
-import kala.alarm.server.data.EmailRepository;
+import kala.alarm.server.data.GenericHibernateRepository;
+import kala.alarm.server.data.Repository;
 import kala.alarm.server.model.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import javax.ws.rs.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 @Singleton
@@ -17,12 +15,13 @@ import java.util.List;
 public class EmailService {
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
 
-    private EmailRepository emailRepository = new EmailRepository();
+    private Repository<Email> emailRepository = new GenericHibernateRepository<>(Email.class);
 
 
     public Email createEmail(Email email) {
         LOG.debug("Email address {}, id: {}", email.getAddress(), email.getId());
         emailRepository.save(email);
+
         return email;
     }
 
