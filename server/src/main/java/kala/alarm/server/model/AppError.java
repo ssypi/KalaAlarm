@@ -1,12 +1,13 @@
 package kala.alarm.server.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class AppError {
-    private int applicationId;
+
+    @ManyToOne
+    private Application application;
+
     private String message;
 
     @Id
@@ -16,16 +17,11 @@ public class AppError {
     public AppError() {
     }
 
-    public AppError(String message, int applicationId) {
-        this.applicationId = applicationId;
-        this.message = message;
+    public Application getApplication() { return application;
     }
 
-    public int getApplicationId() { return applicationId;
-    }
-
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
+    public void setApplication(Application applicationId) {
+        this.application = applicationId;
     }
 
     public String getMessage() {

@@ -2,7 +2,9 @@ package kala.alarm.server.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,6 +18,9 @@ public class Application {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<EmailAddress> subscribers = new HashSet<>();
+
+    @OneToMany
+    private List<AppError> errors = new ArrayList<>();
 
     public Application() {
 
