@@ -5,7 +5,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.BufferedReader;
@@ -17,17 +16,28 @@ import java.io.UnsupportedEncodingException;
  * Internal class used to access the remote error notification API.
  */
 public class ApiClient {
+    private static final String CONFIG_FILE_NAME = "kala-alarm.properties";
 
-    public void sendError(String message, int applicationId) {
+    private String apiUrl;
+    private int apiKey;
 
-        String apiUrl = "http://37.35.81.30:80/api/error";
+    public ApiClient() {
+        ConfigReader configReader = new ConfigReader(CONFIG_FILE_NAME);
+        apiUrl = configReader.readString("API_URL", null);
+        apiKey = configReader.readInt("API_KEY", -1);
+        if (apiUrl == null) {
+            throw new AssertionError("No API_URL set in config file. Check " + CONFIG_FILE_NAME);
+        }
+    }
+
+    public void sendError(String message) {
         String apiInput = "{\n" +
                 " \"message\" : \"" + message + "\",\n" +
                 " \"application\": {\n" +
-                "   \"id\" : " + applicationId + "\n" +
+                "   \"id\" : " + apiKey + "\n" +
                 "   }\n" +
                 "}";
-        String output = "";
+        String output;
 
         try {
             System.out.println(apiInput);
@@ -53,10 +63,6 @@ public class ApiClient {
             }
 
             httpClient.close();
-
-
-
-
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -64,8 +70,6 @@ public class ApiClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 

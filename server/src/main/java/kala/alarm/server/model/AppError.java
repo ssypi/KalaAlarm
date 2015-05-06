@@ -8,6 +8,8 @@ public class AppError {
     @ManyToOne
     private Application application;
 
+
+    @Column(length = 1000)
     private String message;
 
     @Id

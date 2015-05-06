@@ -11,9 +11,11 @@ import ch.qos.logback.core.AppenderBase;
  * Recommended to only be used for ERROR level logs to avoid unnecessary spam and network traffic.
  */
 public class LogbackSendErrorAppender extends AppenderBase<ILoggingEvent> {
+    private final ApiClient apiClient = new ApiClient();
 
     @Override
     protected void append(ILoggingEvent eventObject) {
-        //
+        System.out.println("Message from appender: " + eventObject.getMessage());
+        apiClient.sendError(eventObject.getMessage());
     }
 }
