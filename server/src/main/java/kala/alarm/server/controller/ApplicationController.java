@@ -4,7 +4,6 @@ import kala.alarm.server.model.AppError;
 import kala.alarm.server.model.Application;
 import kala.alarm.server.model.EmailAddress;
 import kala.alarm.server.service.ApplicationService;
-import org.apache.commons.mail.Email;
 import org.glassfish.grizzly.http.server.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

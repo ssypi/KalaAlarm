@@ -32,6 +32,8 @@
 
         $("#softwarelist").click(".applicationButton", function(event) {
             applicationId = event.target.id;
+            //$("#softwarelist").find("li").removeClass("selectedbutton");
+            //$(event.target).addClass("selectedbutton");
             updateEmails();
             updateErrorHistory();
         });
@@ -73,7 +75,6 @@
             })
         });
     };
-
 })(jQuery, kalaApp);
 
 
