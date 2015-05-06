@@ -6,6 +6,9 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -14,13 +17,18 @@ import java.util.Set;
  * Created by Jussi on 5.5.2015.
  */
 public class EmailSender {
+    private Logger LOG = LoggerFactory.getLogger(EmailSender.class);
 
     private String userName = "Teuvotestaaja123@gmail.com";
     private String userPassword = "testaaja";
 
 
 
-    public void sendEmail(EmailMessage emailMessage, Set<EmailAddress> recipientList){
+    public void sendEmail(EmailMessage emailMessage, Set<EmailAddress> recipientList) {
+        if (recipientList == null || recipientList.isEmpty()) {
+            LOG.debug("No recipients for email " + emailMessage.getSubject());
+            return;
+        }
 
         Email email = new SimpleEmail();
 
@@ -38,7 +46,7 @@ public class EmailSender {
             recipientList.forEach(emailAddress -> {
 
                 try {
-                    
+
                     email.addTo(emailAddress.getAddress());
 
                 } catch (EmailException e) {

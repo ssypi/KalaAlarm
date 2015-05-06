@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import javax.ws.rs.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -31,11 +30,11 @@ public class ErrorService {
 
 
     public void createError(AppError error) {
-        LOG.debug("Error from {}, message: {}", error.getApplicationId(), error.getMessage());
+        LOG.debug("Error from {}, message: {}", error.getApplication(), error.getMessage());
         errorRepository.save(error);
-        Set<EmailAddress> recipients = applicationService.getSubscribers(error.getApplicationId());
+        Set<EmailAddress> recipients = applicationService.getSubscribers(error.getApplication().getId());
         EmailMessage emailMessage = new EmailMessage();
-        Application application = applicationService.getApplication(error.getApplicationId());
+        Application application = applicationService.getApplication(error.getApplication().getId());
         emailMessage.setSubject("Error from: " + application.getName());
         emailMessage.setBody(error.getMessage());
         emailSender.sendEmail(emailMessage, recipients);

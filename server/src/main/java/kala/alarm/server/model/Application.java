@@ -54,4 +54,12 @@ public class Application {
     public void setSubscribers(Set<EmailAddress> subscribers) {
         this.subscribers = subscribers;
     }
+
+    public List<AppError> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<AppError> errors) {
+        this.errors = errors;
+    }
 }
