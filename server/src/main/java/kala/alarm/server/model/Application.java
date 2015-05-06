@@ -1,6 +1,8 @@
 package kala.alarm.server.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +21,8 @@ public class Application {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<EmailAddress> subscribers = new HashSet<>();
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "application")
     private List<AppError> errors = new ArrayList<>();
 
     public Application() {

@@ -7,6 +7,7 @@
     var applicationService = app.applicationService;
     var errorService = app.errorService;
     var applicationId = null;
+    var previousSelectedButton;
 
     $(document).ready(function() {
         // Attach click listeners after page has been fully loaded
@@ -18,6 +19,7 @@
             }
             $("<li>" + "<button>" + name + "</button>" + "</li>").appendTo('#softwarelist');
         });
+
 
         $('#addemailbutton').click(function () {
             var email = prompt("Please insert email");
@@ -32,8 +34,14 @@
 
         $("#softwarelist").click(".applicationButton", function(event) {
             applicationId = event.target.id;
-            updateEmails();
-            updateErrorHistory();
+            if (event.target.closest("button")) {
+                $(previousSelectedButton).removeClass("selectedbutton");
+                previousSelectedButton = event.target;
+
+                $(event.target).closest("button").addClass("selectedbutton");
+                updateEmails();
+                updateErrorHistory();
+            }
         });
 
         updateApplications();
@@ -46,9 +54,9 @@
         applicationService.getSubscribers(applicationId).done(function (emails) {
             $('#emaillist').empty();
             emails.forEach(function (email) {
-                $('#emaillist').append("<li>" + email.address
+                $('#emaillist').append("<li class='emaillistelement' style='border: 1px solid black'>" + email.address
                 + "<button class='removeEmailButton' id='"
-                + email.id + "'>X</button>" + "</li>");
+                + email.id + "'>Remove</button>" + "</li>");
             })
         });
     };
@@ -57,7 +65,7 @@
         applicationService.getApplications().done(function (applications) {
             $('#softwarelist').empty();
             applications.forEach(function (application) {
-                $('#softwarelist').append("<li>"
+                $('#softwarelist').append("<li class='softwarelistelement'>"
                 + "<button class='applicationButton' id='"
                 + application.id + "'>" + application.name + "</button> </li>");
             })
@@ -65,15 +73,14 @@
     };
 
     var updateErrorHistory = function () {
-        errorService.getErrors().done(function (errors) {
+        errorService.getErrors(applicationId).done(function (errors) {
             $("#errorhistorylist").empty();
             errors.forEach(function (error) {
-                $("#errorhistorylist").append("<li>"
+                $("#errorhistorylist").append("<li class='errorhistoryelement' style='border: 1px solid black'>"
                 + error.message + "</li>");
             })
         });
     };
-
 })(jQuery, kalaApp);
 
 
