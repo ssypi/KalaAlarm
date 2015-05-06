@@ -2,6 +2,7 @@ package kala.alarm.server.service;
 
 import kala.alarm.server.data.GenericHibernateRepository;
 import kala.alarm.server.data.Repository;
+import kala.alarm.server.model.AppError;
 import kala.alarm.server.model.Application;
 import kala.alarm.server.model.EmailAddress;
 import org.slf4j.Logger;
@@ -34,6 +35,11 @@ public class ApplicationService {
     public Set<EmailAddress> getSubscribers(int applicationId) {
         Application application = applicationRepository.getById(applicationId);
         return application.getSubscribers();
+    }
+
+    public List<AppError> getErrors(int applicationId) {
+        Application application = applicationRepository.getById(applicationId);
+        return application.getErrors();
     }
 
     public Application getApplication(int applicationId) {

@@ -65,7 +65,7 @@
     };
 
     var updateErrorHistory = function () {
-        errorService.getErrors().done(function (errors) {
+        errorService.getErrors(applicationId).done(function (errors) {
             $("#errorhistorylist").empty();
             errors.forEach(function (error) {
                 $("#errorhistorylist").append("<li>"

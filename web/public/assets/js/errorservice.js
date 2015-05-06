@@ -12,9 +12,9 @@ var kalaApp = kalaApp || {};
          * example: getErrors().done(function(data) { console.log(data)});
          * @returns {*} jQuery promise with array of all errors
          */
-        var getErrors = function () {
+        var getErrors = function (applicationId) {
             // TODO: get errors from server, currently just dummy data
-            return gateway.getData("error");
+            return gateway.getSubResource("application", applicationId, "errors");
         };
 
         return {
