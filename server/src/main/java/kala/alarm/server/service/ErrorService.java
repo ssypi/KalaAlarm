@@ -41,7 +41,7 @@ public class ErrorService {
     }
 
     public List<AppError> getErrors() {
-        return Collections.unmodifiableList(errorRepository.getAll());
+        return errorRepository.getAll();
     }
 
 }
