@@ -7,6 +7,7 @@
     var applicationService = app.applicationService;
     var errorService = app.errorService;
     var applicationId = null;
+    var previousSelectedButton;
 
     $(document).ready(function() {
         // Attach click listeners after page has been fully loaded
@@ -32,10 +33,14 @@
 
         $("#softwarelist").click(".applicationButton", function(event) {
             applicationId = event.target.id;
-            //$("#softwarelist").find("li").removeClass("selectedbutton");
-            //$(event.target).addClass("selectedbutton");
-            updateEmails();
-            updateErrorHistory();
+            if (event.target.closest("button")) {
+                $(previousSelectedButton).removeClass("selectedbutton");
+                previousSelectedButton = event.target;
+
+                $(event.target).closest("button").addClass("selectedbutton");
+                updateEmails();
+                updateErrorHistory();
+            }
         });
 
         updateApplications();
