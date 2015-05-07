@@ -23,7 +23,11 @@
 
         $('#addemailbutton').click(function () {
             var email = prompt("Please insert email");
-            emailService.addEmail(email, applicationId).done(updateEmails);
+            emailService.addEmail(email, applicationId)
+                .done(updateEmails)
+                .fail(function () {
+                    alert("Invalid e-mail");
+                })
         });
 
         $("#emaillist").click(".removeEmailButton", function (event) {

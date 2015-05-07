@@ -10,8 +10,13 @@ var kalaApp = kalaApp || {};
      * @constructor
      */
     var Gateway = function() {
-        var apiUrl = "http://169.254.202.214/api/";
+        var apiUrl = "http://hotwings.bubu.fi/api/";
 
+        /**
+         * Issue a HTTP GET request to a particular resource within the API
+         * @param resource the name of the resource like "email" or "application"
+         * @returns {*}
+         */
         var getData = function(resource) {
             var uri = apiUrl + resource;
             var promise = $.getJSON(uri);

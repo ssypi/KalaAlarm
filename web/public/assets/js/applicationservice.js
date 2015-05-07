@@ -16,6 +16,11 @@ var kalaApp = kalaApp || {};
             return gateway.getData("application");
         };
 
+        /**
+         * Gets the list of the subscribers(e-mails) for a particular app
+         * @param applicationId id
+         * @returns {*} a jQuery promise with the results
+         */
         var getSubscribers = function (applicationId) {
             return gateway.getSubResource("application", applicationId, "subscribers");
         };
