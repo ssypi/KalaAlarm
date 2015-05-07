@@ -142,7 +142,7 @@ ol {
 }
 
 .selectedbutton {
-    background-color: chartreuse;
+    background: chartreuse;
 }
 
 button {

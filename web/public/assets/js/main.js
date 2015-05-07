@@ -30,7 +30,7 @@
                 })
         });
 
-        $("#emaillist").click(".removeEmailButton", function (event) {
+        $("#emaillist").on("click", ".removeEmailButton", function (event) {
             var emailId = event.target.id;
             emailService.deleteEmail(applicationId, emailId).done(updateEmails);
             console.log("Removing email")

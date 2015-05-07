@@ -26,10 +26,18 @@ public class ApplicationService {
     }
 
     public void addSubscriber(int applicationId, EmailAddress email) {
+        boolean found = false;
         Application application = applicationRepository.getById(applicationId);
         Set<EmailAddress> subscribers = application.getSubscribers();
-        subscribers.add(email);
-        applicationRepository.save(application);
+        for (EmailAddress emailAddress : subscribers) {
+            if(emailAddress.getAddress().equals(email.getAddress())) {
+                found = true;
+            }
+        }
+        if (!found) {
+            subscribers.add(email);
+            applicationRepository.save(application);
+        }
     }
 
     public Set<EmailAddress> getSubscribers(int applicationId) {
