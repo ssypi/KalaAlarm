@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'us.kirchmeier.capsule'
+
 
 archivesBaseName = 'kala.alarm.server.model'
 
@@ -7,6 +9,18 @@ version = '0.1'
 
 repositories {
     mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:1.1.8'
+        classpath 'us.kirchmeier:gradle-capsule-plugin:0.10.0'
+    }
 }
 
 dependencies {
@@ -27,3 +41,15 @@ sourceSets {
         output.resourcesDir = "build/classes/main"
     }
 }
+
+
+repositories {
+    mavenCentral()
+}
+
+
+task fatCapsule(type: FatCapsule) {
+    applicationClass 'kala.alarm.server.EmbeddedServer'
+}
+
+task stage(dependsOn: ['clean', 'fatCapsule'])
