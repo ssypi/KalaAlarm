@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Internal class used to access the remote error notification API.
  */
-public class ApiClient {
+class ApiClient {
     private static final String CONFIG_FILE_NAME = "kala-alarm.properties";
 
     private String apiUrl;
