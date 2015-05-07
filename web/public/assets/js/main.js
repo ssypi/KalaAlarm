@@ -1,6 +1,6 @@
 /*global jQuery*/
 
-(function($, app) {
+(function ($, app) {
     "use strict";
 
     var emailService = app.emailService;
@@ -9,7 +9,7 @@
     var applicationId = null;
     var previousSelectedButton;
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Attach click listeners after page has been fully loaded
         $('#addsoftwarebutton').click(function () {
             var name = prompt("Please insert software name");
@@ -26,22 +26,20 @@
             emailService.addEmail(email, applicationId).done(updateEmails);
         });
 
-        $("#emaillist").click(".removeEmailButton", function(event) {
+        $("#emaillist").click(".removeEmailButton", function (event) {
             var emailId = event.target.id;
             emailService.deleteEmail(applicationId, emailId).done(updateEmails);
             console.log("Removing email")
         });
 
-        $("#softwarelist").click(".applicationButton", function(event) {
+        $("#softwarelist").on("click", ".applicationButton", function (event) {
             applicationId = event.target.id;
-            if (event.target.closest("button")) {
-                $(previousSelectedButton).removeClass("selectedbutton");
-                previousSelectedButton = event.target;
+            $(previousSelectedButton).removeClass("selectedbutton");
+            previousSelectedButton = event.target;
 
-                $(event.target).closest("button").addClass("selectedbutton");
-                updateEmails();
-                updateErrorHistory();
-            }
+            $(event.target).addClass("selectedbutton");
+            updateEmails();
+            updateErrorHistory();
         });
 
         updateApplications();
